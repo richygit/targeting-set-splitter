@@ -1,7 +1,7 @@
 require_relative '../target_set'
 require 'rspec'
 
-RSpec.describe 'target_set' do
+RSpec.describe TargetSet do
   let(:target_set) { TargetSet.new(['hk'], ['desktop'], 0, 13..20) }
   let(:diff_countries) { TargetSet.new(['jp'], ['desktop'], 0, 13..20) }
   let(:diff_placement) { TargetSet.new(['hk'], ['mobile'], 0, 13..20) }
