@@ -1,0 +1,22 @@
+###vim
+
+# swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+
+#osx
+**/.DS_Store
+
+# Ignore bundler config.
+/.bundle
+
+.byebug_history
+.env
+
