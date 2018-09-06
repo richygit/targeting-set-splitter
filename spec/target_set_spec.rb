@@ -13,16 +13,24 @@ RSpec.describe 'target_set' do
       expect(target_set.eql?(target_set.clone)).to be true
     end
 
-    it 'should return false when members are not the same' do
-      expect(target_set.eql?(diff_countries)).to be false
+    context 'members are not the same' do
+      specify { expect(target_set.eql?(diff_countries)).to be false }
+      specify { expect(target_set.eql?(diff_placement)).to be false }
+      specify { expect(target_set.eql?(diff_gender)).to be false }
+      specify { expect(target_set.eql?(diff_age)).to be false }
     end
   end
 
   describe '#hash' do
     it 'should return true when members are the same' do
+      expect(target_set.hash).to eq(target_set.clone.hash)
     end
 
-    it 'should return false when members are not the same' do
+    context 'members are not the same' do
+      specify { expect(target_set.hash).not_to eq(diff_countries.hash) }
+      specify { expect(target_set.hash).not_to eq(diff_placement.hash) }
+      specify { expect(target_set.hash).not_to eq(diff_gender.hash) }
+      specify { expect(target_set.hash).not_to eq(diff_age.hash) }
     end
   end
 end
