@@ -23,6 +23,12 @@ RSpec.describe TargetingSetSplitter do
     end
 
     it "should create sets for both genders when gender is '2'" do
+      target = TargetSet.new(['hk'], ['desktop'], 2, [11,20])
+      result_set = [
+        TargetSet.new(['hk'], ['desktop'], 0, [11,20]),
+        TargetSet.new(['hk'], ['desktop'], 1, [11,20])
+      ]
+      expect(subject.split(target)).to match_array(result_set)
     end
 
     it 'should split countries' do
