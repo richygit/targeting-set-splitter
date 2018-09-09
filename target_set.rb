@@ -59,4 +59,20 @@ class TargetSet
   def to_s
     return "TargetSet[c: #{self.countries.to_s}, p: #{self.placements.to_s}, g: #{self.gender}, a: #{self.age_range}]"
   end
+
+  def validate!
+      validate_countries!
+  end
+
+private
+
+  def validate_countries!
+    if self.countries.nil? or self.countries.size < 1
+      raise ArgumentError.new("At least 1 country required") 
+    end
+
+    if !self.countries.nil? and self.countries.size > 200
+      raise ArgumentError.new("Maximum 200 countries allowed") 
+    end
+  end
 end

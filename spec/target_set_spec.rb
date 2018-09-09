@@ -96,4 +96,21 @@ RSpec.describe TargetSet do
       end
     end
   end
+
+  describe 'validate!' do
+    context 'when validating countries' do
+      context 'with no countries' do
+        it 'should raise an error' do
+          target_set.countries = []
+          expect{ target_set.validate! }.to raise_error(ArgumentError)
+        end
+      end
+      context 'when more than 200 countries' do
+        it 'should raise an error' do
+          target_set.countries = ('aa'..'zz').to_a
+          expect{ target_set.validate! }.to raise_error(ArgumentError)
+        end
+      end
+    end
+  end
 end
