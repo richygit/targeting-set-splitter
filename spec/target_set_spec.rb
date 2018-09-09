@@ -78,4 +78,22 @@ RSpec.describe TargetSet do
       expect(subject.age_range_expanded).to match_array([[8,10], [11, 20], [21,30]])
     end
   end
+
+  describe '#eql?' do
+    context 'with equal target sets' do
+      it 'should return true' do
+        expect(target_set.eql?(target_set)).to be true
+        expect(target_set.eql?(target_set.clone)).to be true
+      end
+    end
+
+    context 'with unequal target sets' do
+      it 'should return false' do
+        expect(target_set.eql?(diff_countries)).to be false
+        expect(target_set.eql?(diff_placement)).to be false
+        expect(target_set.eql?(diff_gender)).to be false
+        expect(target_set.eql?(diff_age)).to be false
+      end
+    end
+  end
 end
