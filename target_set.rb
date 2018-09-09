@@ -31,6 +31,7 @@ class TargetSet
       set_end = decimal_end(set_start)
     end
 
+    set_end = age_end if age_end < set_end
     ages_set << [set_start, set_end]
     return ages_set
   end

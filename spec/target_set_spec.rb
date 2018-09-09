@@ -51,17 +51,31 @@ RSpec.describe TargetSet do
   end
     
   describe '#gender_expanded' do
-    let(:target) { TargetSet.new}
-
     it 'should return the expanded gender set' do
-      target.gender = 0
-      expect(target.gender_expanded).to match_array([0])
+      subject.gender = 0
+      expect(subject.gender_expanded).to match_array([0])
 
-      target.gender = 1
-      expect(target.gender_expanded).to match_array([1])
+      subject.gender = 1
+      expect(subject.gender_expanded).to match_array([1])
 
-      target.gender = 2
-      expect(target.gender_expanded).to match_array([0,1])
+      subject.gender = 2
+      expect(subject.gender_expanded).to match_array([0,1])
+    end
+  end
+
+  describe '#age_range_expanded' do
+    it 'should return the expanded age ranges' do
+      subject.age_range = [0,0]
+      expect(subject.age_range_expanded).to match_array([[0,0]])
+
+      subject.age_range = [1,2]
+      expect(subject.age_range_expanded).to match_array([[1,2]])
+
+      subject.age_range = [8,11]
+      expect(subject.age_range_expanded).to match_array([[8,10], [11, 11]])
+
+      subject.age_range = [8,30]
+      expect(subject.age_range_expanded).to match_array([[8,10], [11, 20], [21,30]])
     end
   end
 end
