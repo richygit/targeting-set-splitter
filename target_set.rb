@@ -62,6 +62,9 @@ class TargetSet
 
   def validate!
       validate_countries!
+      validate_age_range!
+      #validate_placement!
+      #validate_gender!
   end
 
 private
@@ -73,6 +76,20 @@ private
 
     if !self.countries.nil? and self.countries.size > 200
       raise ArgumentError.new("Maximum 200 countries allowed") 
+    end
+  end
+  
+  def validate_age_range!
+    if self.age_range.nil? or self.age_range.size != 2
+      raise ArgumentError.new('Start age and end age are required') 
+    end
+
+    if self.age_range[0] < 0 or self.age_range[1] < 0
+      raise ArgumentError.new('Start and end age must be positive')
+    end
+
+    if self.age_range[0] > self.age_range[1]
+      raise ArgumentError.new('Start age must be lower than end age')
     end
   end
 end

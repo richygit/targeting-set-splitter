@@ -102,13 +102,43 @@ RSpec.describe TargetSet do
       context 'with no countries' do
         it 'should raise an error' do
           target_set.countries = []
-          expect{ target_set.validate! }.to raise_error(ArgumentError)
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /at least 1 country/i)
         end
       end
       context 'when more than 200 countries' do
         it 'should raise an error' do
           target_set.countries = ('aa'..'zz').to_a
-          expect{ target_set.validate! }.to raise_error(ArgumentError)
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /maximum 200/i)
+        end
+      end
+    end
+
+    context 'when validating age range' do
+      context 'with start age larger than end age' do
+        it 'should raise an error' do
+          target_set.age_range = [2,1]
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /must be lower than end/i)
+        end
+      end
+
+      context 'with negative ages' do
+        it 'should raise an error' do
+          target_set.age_range = [-3,-1]
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /must be positive/i)
+        end
+      end
+
+      context 'with one element' do
+        it 'should raise an error' do
+          target_set.age_range = [3]
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /start age and end age/i)
+        end
+      end
+
+      context 'with more than 2 elements' do
+        it 'should raise an error' do
+          target_set.age_range = [1,2,3]
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /start age and end age/i)
         end
       end
     end
