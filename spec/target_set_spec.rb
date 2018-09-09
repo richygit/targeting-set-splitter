@@ -2,11 +2,11 @@ require_relative '../target_set'
 require 'rspec'
 
 RSpec.describe TargetSet do
-  let(:target_set) { TargetSet.new(['hk'], ['desktop'], 0, 13..20) }
-  let(:diff_countries) { TargetSet.new(['jp'], ['desktop'], 0, 13..20) }
-  let(:diff_placement) { TargetSet.new(['hk'], ['mobile'], 0, 13..20) }
-  let(:diff_gender) { TargetSet.new(['hk'], ['desktop'], 1, 13..20) }
-  let(:diff_age) { TargetSet.new(['hk'], ['desktop'], 0, 21..30) }
+  let(:target_set) { TargetSet.new(['hk'], ['desktop'], 0, [13,20]) }
+  let(:diff_countries) { TargetSet.new(['jp'], ['desktop'], 0, [13,20]) }
+  let(:diff_placement) { TargetSet.new(['hk'], ['mobile'], 0, [13,20]) }
+  let(:diff_gender) { TargetSet.new(['hk'], ['desktop'], 1, [13,20]) }
+  let(:diff_age) { TargetSet.new(['hk'], ['desktop'], 0, [21,30]) }
 
   describe '#eql?' do
     it 'should return true when members are the same' do
@@ -98,7 +98,7 @@ RSpec.describe TargetSet do
   end
 
   describe 'validate!' do
-    context 'when validating countries' do
+    context 'countries: ' do
       context 'with no countries' do
         it 'should raise an error' do
           target_set.countries = []
@@ -113,7 +113,22 @@ RSpec.describe TargetSet do
       end
     end
 
-    context 'when validating age range' do
+    context 'placement: ' do
+      context 'with invalid number of placements' do
+        it 'should raise an error' do
+          target_set.placements = []
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /between 1 and 6 placements/i)
+
+          target_set.placements = ['1', '2', '3', '4', '5', '6', '7']
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /between 1 and 6 placements/i)
+        end
+      end
+    end
+
+    context 'gender: ' do
+    end
+
+    context 'age range: ' do
       context 'with start age larger than end age' do
         it 'should raise an error' do
           target_set.age_range = [2,1]

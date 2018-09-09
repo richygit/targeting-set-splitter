@@ -63,7 +63,7 @@ class TargetSet
   def validate!
       validate_countries!
       validate_age_range!
-      #validate_placement!
+      validate_placements!
       #validate_gender!
   end
 
@@ -90,6 +90,12 @@ private
 
     if self.age_range[0] > self.age_range[1]
       raise ArgumentError.new('Start age must be lower than end age')
+    end
+  end
+  
+  def validate_placements!
+    if self.placements.nil? or !(1..6).include?(self.placements.size)
+      raise ArgumentError.new('Between 1 and 6 placements required')
     end
   end
 end
