@@ -15,11 +15,28 @@ class TargetSet
   end
 
   def gender_expanded
-    return [self.gender]
+    return self.gender == 2 ? [0,1] : [self.gender]
+  end
+
+  def decimal_end(num)
+    return num if num%10 == 0
+    return ((num/10)+1) * 10
   end
 
   def age_range_expanded
-    return [self.age_range]
+    age_start, age_end = self.age_range
+    ages_set = []
+    set_start = age_start
+    set_end = decimal_end(set_start)
+
+    while set_end < age_end
+      ages_set << [set_start, set_end]
+      set_start = set_end + 1
+      set_end = decimal_end(set_start)
+    end
+
+    ages_set << [set_start, set_end]
+    return ages_set
   end
 
   def eql?(other)
