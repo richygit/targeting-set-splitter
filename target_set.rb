@@ -64,7 +64,7 @@ class TargetSet
       validate_countries!
       validate_age_range!
       validate_placements!
-      #validate_gender!
+      validate_gender!
   end
 
 private
@@ -96,6 +96,12 @@ private
   def validate_placements!
     if self.placements.nil? or !(1..6).include?(self.placements.size)
       raise ArgumentError.new('Between 1 and 6 placements required')
+    end
+  end
+  
+  def validate_gender!
+    unless (0..2).include?(self.gender)
+      raise ArgumentError.new('Gender can be 0,1 or 2')
     end
   end
 end

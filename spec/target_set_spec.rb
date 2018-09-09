@@ -126,6 +126,12 @@ RSpec.describe TargetSet do
     end
 
     context 'gender: ' do
+      context 'with invalid gender number' do
+        it 'should raise an error' do
+          target_set.gender = 3
+          expect{ target_set.validate! }.to raise_error(ArgumentError, /gender can be 0,1 or 2/i)
+        end
+      end
     end
 
     context 'age range: ' do
