@@ -3,7 +3,7 @@ require 'set'
 class TargetSet
   attr_accessor :countries, :placements, :gender, :age_range
 
-  def initialize(countries, placements, gender, age_range)
+  def initialize(countries=nil, placements=nil, gender=nil, age_range=nil)
     self.countries = countries
     self.placements = placements
     self.gender = gender
