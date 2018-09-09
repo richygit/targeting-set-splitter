@@ -10,10 +10,6 @@ class TargetSet
     self.age_range = age_range
   end
 
-  def ==(other)
-    return eql?(other)
-  end
-
   def gender_expanded
     return self.gender == 2 ? [0,1] : [self.gender]
   end
@@ -37,6 +33,10 @@ class TargetSet
 
     ages_set << [set_start, set_end]
     return ages_set
+  end
+
+  def ==(other)
+    return eql?(other)
   end
 
   def eql?(other)

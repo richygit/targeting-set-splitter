@@ -33,4 +33,35 @@ RSpec.describe TargetSet do
       specify { expect(target_set.hash).not_to eq(diff_age.hash) }
     end
   end
+
+  describe '#decimal_end' do
+    context 'when not a round decimal number' do
+      it 'should return the next higher decimal number' do
+        expect(subject.decimal_end(1)).to eq(10)
+        expect(subject.decimal_end(24)).to eq(30)
+      end
+    end
+
+    context "when it's a decimal number" do
+      it 'should return itself' do
+        expect(subject.decimal_end(0)).to eq(0)
+        expect(subject.decimal_end(90)).to eq(90)
+      end
+    end
+  end
+    
+  describe '#gender_expanded' do
+    let(:target) { TargetSet.new}
+
+    it 'should return the expanded gender set' do
+      target.gender = 0
+      expect(target.gender_expanded).to match_array([0])
+
+      target.gender = 1
+      expect(target.gender_expanded).to match_array([1])
+
+      target.gender = 2
+      expect(target.gender_expanded).to match_array([0,1])
+    end
+  end
 end
