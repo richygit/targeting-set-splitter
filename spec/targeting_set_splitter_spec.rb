@@ -21,6 +21,37 @@ RSpec.describe TargetingSetSplitter do
       expect(subject.split(target)).to match_array(result_set)
     end
 
+    it 'should split all dimensions' do
+      target = TargetSet.new(['hk', 'jp'], ['desktop', 'mobile', 'external'], 2, [13,30])
+      result_set = [
+        TargetSet.new(['hk'], ['desktop'], 0, [13,20]),
+        TargetSet.new(['hk'], ['desktop'], 0, [21,30]),
+        TargetSet.new(['hk'], ['mobile'], 0, [13,20]),
+        TargetSet.new(['hk'], ['mobile'], 0, [21,30]),
+        TargetSet.new(['hk'], ['external'], 0, [13,20]),
+        TargetSet.new(['hk'], ['external'], 0, [21,30]),
+        TargetSet.new(['jp'], ['desktop'], 0, [13,20]),
+        TargetSet.new(['jp'], ['desktop'], 0, [21,30]),
+        TargetSet.new(['jp'], ['mobile'], 0, [13,20]),
+        TargetSet.new(['jp'], ['mobile'], 0, [21,30]),
+        TargetSet.new(['jp'], ['external'], 0, [13,20]),
+        TargetSet.new(['jp'], ['external'], 0, [21,30]),
+        TargetSet.new(['hk'], ['desktop'], 1, [13,20]),
+        TargetSet.new(['hk'], ['desktop'], 1, [21,30]),
+        TargetSet.new(['hk'], ['mobile'], 1, [13,20]),
+        TargetSet.new(['hk'], ['mobile'], 1, [21,30]),
+        TargetSet.new(['hk'], ['external'], 1, [13,20]),
+        TargetSet.new(['hk'], ['external'], 1, [21,30]),
+        TargetSet.new(['jp'], ['desktop'], 1, [13,20]),
+        TargetSet.new(['jp'], ['desktop'], 1, [21,30]),
+        TargetSet.new(['jp'], ['mobile'], 1, [13,20]),
+        TargetSet.new(['jp'], ['mobile'], 1, [21,30]),
+        TargetSet.new(['jp'], ['external'], 1, [13,20]),
+        TargetSet.new(['jp'], ['external'], 1, [21,30])
+      ]
+      expect(subject.split(target)).to match_array(result_set)
+    end
+    
     it "should create sets for both genders when gender is '2'" do
       target = build(:target_set, gender: 2)
       result_set = [
