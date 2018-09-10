@@ -74,5 +74,10 @@ RSpec.describe TargetingSetSplitter do
       expect(subject.split(target)).to match_array(result_set)
     end
 
+    it 'should validate the target set' do
+      target = TargetSet.new(['hk'], ['desktop'], 0, [-1,30])
+      expect{ subject.split(target) }.to raise_error(ArgumentError)
+    end
+
   end
 end
