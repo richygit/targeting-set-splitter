@@ -1,5 +1,4 @@
 require_relative '../targeting_set_splitter'
-require 'rspec'
 
 RSpec.describe TargetingSetSplitter do
   describe '#split' do
@@ -18,7 +17,7 @@ RSpec.describe TargetingSetSplitter do
         TargetSet.new(['jp'], ['mobile'], 0, [21,30]),
         TargetSet.new(['jp'], ['external'], 0, [13,20]),
         TargetSet.new(['jp'], ['external'], 0, [21,30])
-      ].to_set
+      ]
       expect(subject.split(target)).to match_array(result_set)
     end
 
@@ -72,6 +71,5 @@ RSpec.describe TargetingSetSplitter do
       target = build(:target_set, age_range: [-11,40])
       expect{ subject.split(target) }.to raise_error(ArgumentError)
     end
-
   end
 end

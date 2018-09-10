@@ -1,5 +1,4 @@
 require_relative '../target_set'
-require 'rspec'
 
 RSpec.describe TargetSet do
   let(:target_set) { TargetSet.new(['hk'], ['desktop'], 0, [13,20]) }

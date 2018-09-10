@@ -1,5 +1,3 @@
-require 'set'
-
 class TargetSet
   attr_accessor :countries, :placements, :gender, :age_range
 
